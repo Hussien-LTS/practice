@@ -6,12 +6,12 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
-import AdminDashboard from "./pages/AdminDashboard";
 import AdminRoute from "./components/AdminRoute";
 import Users from "./pages/Users";
 import UserForm from "./pages/UserForm";
 import Products from "./pages/Products";
 import ProductForm from "./pages/ProductForm";
+import AdminDashboard from "./pages/AdminDashboard";
 function App() {
   return (
     <AuthProvider>
@@ -28,21 +28,23 @@ function App() {
         <Route path="/products/edit/:id" element={<ProductForm />} />
         <Route
           path="/dashboard"
+          // element={<Dashboard />}
+
           element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/admin-dashboard"
+          element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+          }
+        />
       </Routes>
-      <Route
-        path="/admin-dashboard"
-        element={
-          <AdminRoute>
-            <AdminDashboard />
-          </AdminRoute>
-        }
-      />
     </AuthProvider>
   );
 }

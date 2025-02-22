@@ -9,8 +9,10 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    console.log("3333333333rrrrrrrrr33333333", token);
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
       axios
         .get("http://localhost:5000/api/auth/me")
         .then((res) => setUser(res.data))
@@ -23,6 +25,8 @@ export const AuthProvider = ({ children }) => {
       email,
       password,
     });
+    console.log("333333333333333333");
+
     localStorage.setItem("token", data.token);
     setUser(data.user);
   };
