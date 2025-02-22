@@ -1,5 +1,5 @@
 const express = require("express");
-const { protect } = require("../middleware/authMiddleware");
+const { protect, verifyAdmin } = require("../middleware/authMiddleware");
 const {
   createProduct,
   getProducts,
@@ -11,10 +11,10 @@ const {
 const router = express.Router();
 
 // CRUD Routes
-router.post("/", protect, createProduct); // Create product (protected)
+router.post("/", protect, verifyAdmin, createProduct); // Create product (protected)
 router.get("/", getProducts); // Get all products (public)
 router.get("/:id", getProductById); // Get product by ID (public)
-router.put("/:id", protect, updateProduct); // Update product (protected)
-router.delete("/:id", protect, deleteProduct); // Delete product (protected)
+router.put("/:id", protect, verifyAdmin, updateProduct); // Update product (protected)
+router.delete("/:id", protect, verifyAdmin, deleteProduct); // Delete product (protected)
 
 module.exports = router;
